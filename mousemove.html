@@ -1,0 +1,94 @@
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<style>
+h1 {
+  font-size: large;
+  style: bold;
+}
+#box {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  background: lightblue;
+  float: left;
+  margin: 40px;
+  padding: 3px;
+  font-size: small;
+  text-align: center;
+
+}
+#keybutton {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  border: 1px solid;
+  float: left;
+  margin: 40px;
+  padding: 3px;
+  font-size: small;
+  text-align: center;
+}
+
+
+#outputbox, #outputboxkeys{
+  position: relative;
+  height: 50%;
+  width: 300px;
+  overflow-y: auto;
+  color: green;
+  border: 1px solid;
+  padding: 5px;
+  margin: 5px;
+  float:left;
+}
+#outputbox{
+  clear:left;
+}
+#generateform {
+  float:left;
+  padding: 50px;
+}
+#outcontainer {
+  clear:both;
+  float:left;
+}
+</style>
+
+<body>
+<h1>Application to test browser user-input timing performance. <p> <cite>Version 0.1.0 --  Joris Derese </cite></h1>
+
+<div>  <p>The browser will register the time between pairs of consecutive keystrokes. Execute pairs of two keystrokes to see the results.</p>
+  <p>The browser will also register the time spent by the mouse pointer inside the blue box. To start testing, move your mouse pointer in and out the blue box below: </p>
+  <p>Press the 'Generate results arrays' button to display the results as CSV strings.</p>
+</div>
+
+
+<div id="box">Move mouse here</div>
+
+<form id="generateform">
+  <button type="button", id="generate", onclick="">Generate results arrays</button>
+</form>
+
+<div id="keybutton">Press any key</div>
+
+<div id="outputbox">
+  <table id="results">
+    <tbody>
+      <tr><td>Mouse movement results:</td></tr>
+    </tbody>
+  </table>
+</div>
+<div id="outputboxkeys">
+  <table id="resultskeys">
+    <tbody>
+      <tr><td>Keystroke results:</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="outcontainer">
+</div>
+</body>
+
+
+<script src="mousemove.js"></script>
+
