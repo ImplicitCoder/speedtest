@@ -1,0 +1,67 @@
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<style>
+h1 {
+  font-size: large;
+  style: bold;
+}
+#box {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  background: lightblue;
+  float: left;
+  margin: 40px;
+  padding: 3px;
+  font-size: small;
+  text-align: center;
+
+}
+#keybutton {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  border: 1px solid;
+  float: left;
+  margin: 40px;
+  padding: 3px;
+  font-size: small;
+  text-align: center;
+}
+
+
+#outputbox, #outputboxkeys{
+  position: relative;
+  height: 50%;
+  width: 300px;
+  overflow-y: auto;
+  color: green;
+  border: 1px solid;
+  padding: 5px;
+  margin: 5px;
+  float:left;
+}
+#outputbox{
+  clear:left;
+}
+#requestpaint {
+  float:left;
+  padding: 50px;
+}
+#outcontainer {
+  clear:both;
+  float:left;
+}
+</style>
+
+<body>
+<h1>Application to test browser display rendering  performance. <p> <cite>Version 0.1.0 --  Joris Derese </cite></h1>
+
+<div id="refresh">  <p>The browser requests 100 consecutive screen refreshes... </p> </div>
+
+
+<form id="requestpaint">
+  <button type="button", id="generate", onclick="">Test screen update performance</button>
+</form>
+<script src="demo2.js"></script>
+
