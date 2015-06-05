@@ -7,12 +7,18 @@ window.onload= function(){
 
       var count=0;
       var sampleArray = [];
+      var reqPaintTime;
+      var colorValue = 0;
+      var countFrames = 0;
+      var reqFrames = 10;
+      var colorArray = ["blue", "green", "red", "yellow"];
 
-      function animate(now) {
+
+      function testAnimation(now) {
         var nowRound = Math.round(now);
         sampleArray.push(nowRound);
         if (count < 100){
-          window.requestAnimationFrame(animate);
+          window.requestAnimationFrame(testAnimation);
           count += 1;
         } else if (count = 100) {
           sampleArray.shift();  // First measurement is incorrect ??
@@ -32,9 +38,33 @@ window.onload= function(){
         }
       };
 
-  window.requestAnimationFrame(animate);
+   window.requestAnimationFrame(testAnimation);
+ function animate(now){
+      console.log("animation executed at " + now);
+      animateDelay = now - reqPaintTime;
+      console.log("the animation executed " +animateDelay +" ms after it was requested");
+      $('#animation').html("animated!" + Math.random());
+         };
 
   $("#requestpaint").on("click", function(){
-    console.log("repaint requested")
+    reqPaintTime =performance.now();
+    console.log("repaint requested at " + reqPaintTime);
+    window.requestAnimationFrame(animate);
     });
+
+  function animateBox(now){
+    var color = colorArray[colorValue%4]; 
+    $('#box').css("background-color", color);
+
+    if (countFrames > reqFrames){
+  
+    colorValue += 1;
+    countFrames = 0;
+    }
+    countFrames +=1;
+  window.requestAnimationFrame(animateBox);
+  }
+  window.requestAnimationFrame(animateBox);
+
+
 };
