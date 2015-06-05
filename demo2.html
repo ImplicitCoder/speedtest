@@ -5,66 +5,70 @@ h1 {
   font-size: large;
   style: bold;
 }
-#box {
+#box , #box-two{
   position: relative;
   width: 100px;
   height: 50px;
   background: lightblue;
   float: left;
-  margin: 40px;
+  margin: 0 0 0 40px;
   padding: 3px;
   font-size: small;
   text-align: center;
+  clear:both;
 
 }
-#keybutton {
-  position: relative;
-  width: 100px;
-  height: 50px;
-  border: 1px solid;
-  float: left;
-  margin: 40px;
-  padding: 3px;
-  font-size: small;
-  text-align: center;
+
+.explanation {
+  clear:both;
+  margin:0 0 20px 5px;
+  padding: 40px 0 0 0;
 }
-
-
-#outputbox, #outputboxkeys{
-  position: relative;
-  height: 50%;
-  width: 300px;
-  overflow-y: auto;
-  color: green;
-  border: 1px solid;
-  padding: 5px;
-  margin: 5px;
+#requestpaint , #requestflash{
   float:left;
-}
-#outputbox{
-  clear:left;
-}
-#requestpaint {
-  float:left;
-  padding: 50px;
+  clear:both;
+  padding: 20px;
 }
 #outcontainer {
   clear:both;
   float:left;
 }
+
+#refresh {
+  font-family: monospace;
+  text-indent: 40px;
+  border: 1px solid;
+}
 </style>
 
 <body>
 <h1>Application to test browser display rendering  performance. <p> <cite>Version 0.1.0 --  Joris Derese </cite></h1>
-
+<p class="explanation">
+1. The script will measure the time in ms between screen refreshes available to the browser. If the browser has access to each screen repaint sent to the monitor by the OS (full availability of resources), the calculated update frequency should match the monitor frequency (typically 60Hz resulting in 60 FPS -frames per second-).
+</p>
 <div id="refresh">  <p>The browser requests 100 consecutive screen refreshes... </p> </div>
 
-
+<p class="explanation">
+2. This demo will change the background color of the box below after a given number of (available) animation frames. Press Start/Stop to run the demo.
+</p>
 <form id="requestpaint">
-  <button type="button", id="generate", onclick="">Test screen update performance</button>
+  <p> Number of frames between color change:</p>
+  <input type="number" id="numberframes" value="20" name="">
+  <button type="button", id="start", onclick="">Start</button>
+  <button type="button", id="stop", onclick="">Stop</button>
 </form>
 
-<div id="animation"></div>
 <div id="box"></div>
+
+<p class="explanation">
+3. This demo will change the background color of the box below to black for the duration (in number of frames) specified in the box below. 
+</p>
+<form id="requestflash">
+  <p> Number of frames  of flash:</p>
+  <input type="number" id="numberflash" value="5" name="">
+  <button type="button", id="flash", onclick="">Flash!</button>
+</form>
+
+<div id="box-two"></div>
 <script src="demo2.js"></script>
 

@@ -12,7 +12,8 @@ window.onload= function(){
       var countFrames = 0;
       var reqFrames = 10;
       var colorArray = ["blue", "green", "red", "yellow"];
-
+      var animRunning = true;
+      var flashCount = 0;
 
       function testAnimation(now) {
         var nowRound = Math.round(now);
@@ -34,23 +35,12 @@ window.onload= function(){
           dispArray=_.map(diffArray, function(value){
                     return " "+value;
                   });
-          $('#refresh').html("Mesured time between refreshes (ms): " + dispArray.toString() + "<p> Average period: " + avgPeriod +" ms.<p>Measured refresh frequency: " + Math.round(1000/avgPeriod) +" Hz.");
+          $('#refresh').html("Measured time between refreshes (ms): " + dispArray.toString() + "<p> Average period: " + avgPeriod +" ms.<p>Measured refresh frequency: " + Math.round(1000/avgPeriod) +" Hz.");
         }
       };
 
    window.requestAnimationFrame(testAnimation);
- function animate(now){
-      console.log("animation executed at " + now);
-      animateDelay = now - reqPaintTime;
-      console.log("the animation executed " +animateDelay +" ms after it was requested");
-      $('#animation').html("animated!" + Math.random());
-         };
-
-  $("#requestpaint").on("click", function(){
-    reqPaintTime =performance.now();
-    console.log("repaint requested at " + reqPaintTime);
-    window.requestAnimationFrame(animate);
-    });
+ 
 
   function animateBox(now){
     var color = colorArray[colorValue%4]; 
@@ -62,9 +52,36 @@ window.onload= function(){
     countFrames = 0;
     }
     countFrames +=1;
-  window.requestAnimationFrame(animateBox);
-  }
-  window.requestAnimationFrame(animateBox);
+    if (animRunning) {
+      window.requestAnimationFrame(animateBox);
+    }
+  };
 
+  function flash(now){
+    $('#box-two').css("background-color", "black");
+    if (flashCount < flashDuration){
+      window.requestAnimationFrame(flash)
+      flashCount += 1;
+      console.log(flashCount);
+    }
+    else if (flashCount = flashDuration){
+      $('#box-two').css("background-color", "lightblue");
+    }
+  };
 
+  $("#start").on("click", function(){
+      reqFrames = $("#numberframes").val();
+      animRunning = true;
+      window.requestAnimationFrame(animateBox);
+  });
+  
+  $("#stop").on("click", function(){
+    animRunning = false;
+  });
+
+  $("#flash").on("click", function(){
+      flashCount = 0;
+      flashDuration = $("#numberflash").val();
+      window.requestAnimationFrame(flash);
+  });
 };
